@@ -1,0 +1,35 @@
+Regex fragment	What it matches	Example matches (strings)
+.	Any single character except newline (by default)	a, 7, !
+.*	Any number of characters (can be empty)	"" (empty), hello, abc123
+.+	One or more characters	a, hello, ---
+.*?	Any number of characters, minimal (lazy)	"", a, hello
+.+?	One or more characters, minimal (lazy)	a, he, x
+[\s\S]*	Absolutely anything (including newlines)	hello, line1\nline2, ""
+[^\n]*	Anything except newline	hello, abc123, ""
+\s*	Optional whitespace	"", " ", "\t\t"
+\s+	One or more whitespace	" ", " ", "\t "
+\S+	One or more non-whitespace “token”	hello, abc123, x_y
+\d	One digit	0, 7
+\d+	One or more digits	7, 12345
+\d*	Zero or more digits	"", 0, 123
+\d{2}	Exactly 2 digits	07, 42
+\d{1,3}	1 to 3 digits	7, 42, 999
+[0-9]+	Digits (explicit ASCII)	123, 007
+[1-9]\d*	Positive integer without leading zero	1, 42, 9000
+`0	[1-9]\d*`	Non-negative integer, no leading zeros (except 0)
+\w	“Word” char (letter/digit/underscore)	a, Z, 7, _
+\w+	Word token	hello, a_b2, _x
+\w*	Optional word token	"", x, abc_1
+[A-Za-z]+	Letters only (ASCII)	Hello, abc
+[A-Za-z]*	Optional letters only	"", Abc
+[A-Z][a-z]*	Capitalized word (simple)	John, Paris
+\p{L}+	Unicode letters (best for i18n names)	Андрій, Maksym, 山田
+\p{N}+	Unicode digits/number chars	123, １２３
+\p{Lu}\p{Ll}+	Uppercase then lowercase letters (Unicode)	John, Émile
+\p{L}[\p{L}\p{N}_]*	Identifier-like (unicode letter start)	Имя1, Name_2
+^	Start of string/line (depending on mode)	Matches position before hello in hello
+$	End of string/line (depending on mode)	Matches position after hello in hello
+^\d+$	Entire string is digits	0, 12345
+^\s*$	Empty or whitespace-only line	"", " "
+\b\w+\b	Whole “word” token (word boundaries)	hello, abc_1 (as a word)
+\B\w+\B	Word chars not at boundaries (inside a word)	In hello, matches ell (conceptually)
