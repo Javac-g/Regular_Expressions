@@ -33,3 +33,20 @@ $	End of string/line (depending on mode)	Matches position after hello in hello
 ^\s*$	Empty or whitespace-only line	"", " "
 \b\w+\b	Whole “word” token (word boundaries)	hello, abc_1 (as a word)
 \B\w+\B	Word chars not at boundaries (inside a word)	In hello, matches ell (conceptually)
+(...)	Capturing group	Captures part like abc inside a larger match
+(?:...)	Non-capturing group	Groups without creating a capture
+(?<name>...)	Named capture group	Captures a part labeled name
+(\w)(\w*)	First char + rest (word)	a → a + ""; test → t + est
+(\d)(\d*)	First digit + remaining digits	7 → 7 + ""; 123 → 1 + 23
+(.)(.*)	First char + rest (anything except newline for .)	A → A+""; Hi! → H+i!
+(\S+)\s+(\S+)	Two tokens separated by whitespace	hello world, foo\tbar
+^(\S.*\S)$	Trimmed non-empty line (no outer spaces)	hello, a b (not " hello ")
+([^,]+)	One “CSV cell” without commas	apple, hello world
+(\w+)(?:-\w+)*	Hyphen-joined words	a-b, foo-bar-baz
+(\w+)(?:,\w+)*	Comma-separated words	a,b,c, one,two
+(\d+)(?:\.\d+)*	Dot-separated numeric segments	1.2, 10.0.7
+(?:\w+\.)+\w+	Dot-separated words (domain-ish)	example.com, a.b.c
+"([^"]*)"	Double-quoted content (no inner ")	"hello", ""
+'([^']*)'	Single-quoted content	'abc', ''
+`([^`]*)`	Backtick-quoted content	`test`, ``
+(\w+)=([^\s]+)	Key=value (value is one token)	a=1, mode=fast
