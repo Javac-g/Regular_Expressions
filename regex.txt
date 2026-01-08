@@ -50,3 +50,26 @@ $	End of string/line (depending on mode)	Matches position after hello in hello
 '([^']*)'	Single-quoted content	'abc', ''
 `([^`]*)`	Backtick-quoted content	`test`, ``
 (\w+)=([^\s]+)	Key=value (value is one token)	a=1, mode=fast
+([^=]+)=([^&]+)	Query-style key=value (until &)	q=hello, lang=en
+(\w+):(.+)	key: value (value is rest of line)	Name: John, Note: hello world
+(?=...)	Positive lookahead (next must match)	In abc123, abc before 123
+(?!...)	Negative lookahead (next must NOT match)	foo not followed by bar
+(?<=...)	Positive lookbehind (prev must match)	Digits preceded by $ in $123
+(?<!...)	Negative lookbehind (prev must NOT match)	cat not preceded by wild
+\.	Literal dot	.
+\+	Literal plus	+
+\?	Literal question mark	?
+|	Literal pipe	`
+\\	Literal backslash	\
+\[	Literal [	[
+\]	Literal ]	]
+\(	Literal (	(
+\)	Literal )	)
+(?>...)	Atomic group (no backtracking inside)	Used to prevent slow fallback matches
+\d++	Possessive digits (no backtracking)	Matches 123 as one locked chunk
+[^/]*+	Possessive “no slash” run	abc, folder (until a /)
+(\w)\1*	Same char repeated (run-length)	aaaa, ___, 777
+(\d+)(\.\d+)?	Integer with optional decimal	10, 10.5
+([A-Za-z_])([A-Za-z0-9_]*)	Identifier: start + rest	x, _tmp, var123
+([^/]+)/([^/]+)	Two path segments	users/123, img/logo
+(?:/[^/]+)+	One or more /segment parts	/a, /a/b/c
